@@ -72,14 +72,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <User size={22} color={color} />,
           headerRight: () => (
             <TouchableOpacity onPress={handleSignOut}>
-              <LogOut
-                size={22}
-                color={
-                  colorScheme === "dark"
-                    ? Colors.light.primary
-                    : Colors.dark.primary
-                }
-              />
+              <LogOut size={22} color={Colors[colorScheme ?? "light"].tint} />
             </TouchableOpacity>
           ),
         }}

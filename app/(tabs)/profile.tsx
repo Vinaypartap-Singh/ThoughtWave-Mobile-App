@@ -1,18 +1,22 @@
 import { Text } from "@/components/Themed";
-import { useClerk, useUser } from "@clerk/clerk-expo";
-import { useRouter } from "expo-router";
-import { Button, Image, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import Colors from "@/constants/Colors";
+import { useUser } from "@clerk/clerk-expo";
+import {
+  ExternalLink,
+  SquareArrowUpRight,
+  SquarePen,
+} from "lucide-react-native";
+import { Image, TouchableOpacity, useColorScheme, View } from "react-native";
 
 export default function Profile() {
-  const { signOut } = useClerk();
-  const router = useRouter();
   const currentUser = useUser();
   const user = currentUser?.user;
+  const colorScheme = useColorScheme();
+  const color = Colors[colorScheme ?? "light"].tint;
 
   return (
-    <View style={{ flex: 1, padding: 20 }}>
-      <View style={{ marginBottom: 20 }}>
+    <View style={{ flex: 1, padding: 20, backgroundColor: "#fff" }}>
+      <View style={{ marginBottom: 10 }}>
         <Image
           source={{ uri: user?.imageUrl }}
           width={90}
@@ -57,6 +61,48 @@ export default function Profile() {
           <Text style={{ fontSize: 20, fontWeight: "bold" }}>0</Text>
           <Text style={{ color: "#777" }}>Posts</Text>
         </View>
+      </View>
+
+      {/* Button */}
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          gap: 18,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            borderWidth: 1,
+            borderColor: "#a3a3a3",
+            paddingVertical: 10,
+            borderRadius: 10,
+            paddingHorizontal: 30,
+            width: "50%",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+            <Text>Edit Profile</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            borderWidth: 1,
+            borderColor: "#a3a3a3",
+            paddingVertical: 10,
+            borderRadius: 10,
+            paddingHorizontal: 30,
+            width: "50%",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+            <Text>Share Profile</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
